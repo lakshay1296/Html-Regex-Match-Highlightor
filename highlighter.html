@@ -1,0 +1,67 @@
+
+<!-- this.*?[0-9] -->
+
+<html>
+
+<head>
+  <script src="hilitor.js"></script>
+</head>
+
+<body>
+
+  <input type="text" name="keywords" id="keywords">
+
+    <div id="playground">
+      <!-- <span id="text"> -->
+        This is a test text body. Here is the number 123456789. And this is the email address 1234 lakshay.saini@lexpredict.com.
+      <!-- </span> -->
+    </div>
+
+    <input type="text" name="regEx" id="regEx" onchange="myFunction();">
+
+    <p id="demo"></p>
+
+
+</body>
+
+<script>
+
+    window.addEventListener("DOMContentLoaded", function(e) {
+      var myHilitor2 = new Hilitor("text");
+      myHilitor2.setMatchType("playground");
+      document.getElementById("keywords").addEventListener("keyup", function(e) {
+
+        var str = document.getElementById("playground");
+        var text = str.textContent;
+        var expression = document.getElementById("keywords").value;
+        var patt = new RegExp("\\b" + expression + "\\b", "ig");
+        var result = text.match(patt);
+        // document.getElementById("demo").innerHTML = result;
+
+        console.log(result);
+
+        // var highlight_text = result[0];
+
+        // for (var i=0; i<result.length; i++){
+        //   myHilitor2.apply(result[i]);
+        // }
+
+        myHilitor2.apply(result[0]);
+
+      }, false);
+    }, false);
+
+</script>
+
+<script>
+function myFunction() {
+  var str = document.getElementById("playground");
+  var text = str.textContent;
+  var expression = document.getElementById("regEx").value;
+  var patt = new RegExp("\\b(" + expression + ")\\b", "ig");
+  var result = text.match(patt);
+  document.getElementById("demo").innerHTML = result;
+}
+</script>
+
+</html>
